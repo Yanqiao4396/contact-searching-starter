@@ -96,7 +96,7 @@ jobs:
         - name: Run Mypy Type Checking Tool
           run: |
             cd contactsearcher
-            poetry run task pylint
+            poetry run task mypy
         # Run the pytest test suite
         - name: Run Pytest Test Suite
           run: |
