@@ -1,0 +1,141 @@
+setup: |
+  cd contactsearcher && poetry install
+  echo "Done installing project dependencies!"
+---
+
+# --> check the Python program
+- contactsearcher/contactsearcher/main.py:
+  - description: Ensure that main.py file exists in the contactsearcher/contactsearcher/ directory
+    check: ConfirmFileExists
+  - description: Complete all TODOs, remove the TODO markers, and rewrite comments for main.py
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: Create a sufficient number of docstring (i.e., multiple-line) comments in main.py
+    check: CountMultipleLineComments
+    options:
+      language: "Python"
+      count: 2
+      exact: false
+  - description: Create a sufficient number of single-line comments in main.py
+    check: CountSingleLineComments
+    options:
+      language: "Python"
+      count: 4
+      exact: false
+
+# --> check the Python program
+- contactsearcher/contactsearcher/search.py:
+  - description: Ensure that search.py file exists in the contactsearcher/contactsearcher/ directory
+    check: ConfirmFileExists
+  - description: Complete all TODOs, remove the TODO markers, and rewrite comments for search.py
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: Create a sufficient number of docstring (i.e., multiple-line) comments in search.py
+    check: CountMultipleLineComments
+    options:
+      language: "Python"
+      count: 2
+      exact: false
+  - description: Create a sufficient number of single-line comments in search.py
+    check: CountSingleLineComments
+    options:
+      language: "Python"
+      count: 7
+      exact: false
+
+# --> check the Python program
+- contactsearcher/tests/test_search.py:
+  - description: Ensure that test_search.py file exists in the contactsearcher/tests/ directory
+    check: ConfirmFileExists
+  - description: Complete all TODOs, remove the TODO markers, and rewrite comments for test_search.py
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: Create a sufficient number of docstring (i.e., multiple-line) comments in test_search.py
+    check: CountMultipleLineComments
+    options:
+      language: "Python"
+      count: 5
+      exact: false
+  - description: Create a sufficient number of single-line comments in test_search.py
+    check: CountSingleLineComments
+    options:
+      language: "Python"
+      count: 5
+      exact: false
+
+# --> check the technical writing for various characteristics
+- writing/reflection.md:
+  - description: Ensure that the reflection.md file exists in the writing/ directory
+    check: ConfirmFileExists
+  - description: Complete all TODOs, remove the TODO markers, and rewrite comments for reflection.md
+    check: MatchFileFragment
+    options:
+      fragment: TODO
+      count: 0
+      exact: true
+  - description: Delete the 'Add Your Name Here' prompt in the reflection file
+    check: MatchFileFragment
+    options:
+      fragment: "Add Your Name Here"
+      count: 0
+      exact: true
+  - description: Write a minimum number of meaningful words in the reflection
+    check: CountFileWords
+    options:
+      count: 500
+      exact: false
+  - description: Confirm that the markdown file has the correct number of headers
+    check: CountMarkdownTags
+    options:
+      tag: heading
+      count: 14
+      exact: false
+  - description: Confirm that the markdown file has the correct number of fenced code blocks
+    check: CountMarkdownTags
+    options:
+      tag: code_block
+      count: 4
+      exact: false
+
+# --> check that the number of commits in the Git repository is beyond a threshold
+- description: Have at least a specific minimum of commits in repository
+  check: CountCommits
+  options:
+    count: 10
+
+# run a command
+- description: Pass the source code formatting checks run by black
+  command: cd contactsearcher && poetry run task black
+
+# run a command
+- description: Pass the linting checks run by flake8
+  command: cd contactsearcher && poetry run task flake8
+
+# run a command
+- description: Pass the import checks run by isort
+  command: cd contactsearcher && poetry run task isort
+
+# run a command
+- description: Pass the linting checks run by mypy
+  command: cd contactsearcher && poetry run task mypy
+
+# run a command
+- description: Pass the linting checks run by pydocstyle
+  command: cd contactsearcher && poetry run task pydocstyle
+
+# run a command
+- description: Pass the linting checks run by pylint
+  command: cd contactsearcher && poetry run task pylint
+
+# run a command
+- description: Pass the linting checks run by pymarkdown
+  command: cd contactsearcher && poetry run task markdownlint
